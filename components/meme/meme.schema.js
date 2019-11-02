@@ -13,7 +13,6 @@ MemeSchema.pre("findOneAndUpdate", function (next) {
         ...this._update.$set,
         updatedAt: Date.now()
     };
-    console.log(this);
     next();
 });
 

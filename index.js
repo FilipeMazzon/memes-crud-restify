@@ -25,7 +25,6 @@
         await server.listen(PORT);
         console.log(`listen on server :${PORT}`)
     } catch (e) {
-        console.error(e);
         console.error("cant start the server")
     }
 })();
