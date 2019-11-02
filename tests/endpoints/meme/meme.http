@@ -1,0 +1,36 @@
+GET {{host}}/meme/
+token: {{token}}
+
+###
+
+POST {{host}}/meme
+token: {{token}}
+Content-Type: application/json
+
+{
+  "titulo": "hue br",
+  "ano": 2000,
+  "descricao": "huehuehue"
+}
+
+###
+
+PATCH {{host}}/meme/5dbde7771b5e06444dbf8438
+token: {{token}}
+Content-Type: application/json
+
+{
+  "titulo": "huebr5"
+}
+
+###
+
+DELETE {{host}}/meme
+token: {{token}}
+Content-Type: application/json
+
+{
+  "id": "5dbdd9740a6a663585baba50"
+}
+
+###
