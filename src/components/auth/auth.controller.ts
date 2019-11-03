@@ -1,13 +1,17 @@
 import * as AuthModule from './auth.module';
+import {Request, Response} from 'restify';
+import {LoginDto, loginResponseDto} from './dto';
+import {HttpCode} from '../../enums/httpCode.enum';
 
-export const login = async (req, res) => {
-    const {username, password} = req.body;
+export const login = async (req: Request, res: Response): Promise<void> => {
+    const loginDTO: LoginDto = req.body;
+    const {username, password} = loginDTO;
     if (!username || !password)
-        return res.send(422, 'username e password sao obrigatorios');
+        return res.send(HttpCode.unprocessableEntity, 'username e password sao obrigatorios');
     try {
-        const result = await AuthModule.login(username, password);
-        return await res.send(result.data);
+        const data: loginResponseDto = await AuthModule.login(loginDTO);
+        return await res.send(HttpCode.success, data);
     } catch (error) {
-        return res.send(401, 'usuario ou senha invalidos');
+        return res.send(HttpCode.unauthorized, 'usuario ou senha invalidos');
     }
 };

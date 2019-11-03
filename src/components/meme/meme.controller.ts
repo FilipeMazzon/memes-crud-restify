@@ -1,36 +1,73 @@
 import * as  MemeModule from './meme.module';
+import {Request, Response} from 'restify';
+import {HttpCode} from "../../enums/httpCode.enum";
+import {MemeCreateDto, MemePatchDto} from './dto';
+import {Meme} from './meme.entity';
 
-export const createMeme = async (req, res) => {
-    const {titulo, descricao, ano} = req.body;
+export const createMeme = async (req: Request, res: Response): Promise<void> => {
+    const memeCreateDto: MemeCreateDto = req.body;
+    const {titulo, descricao, ano} = memeCreateDto;
     if (!titulo || !descricao || !ano)
-        return res.send(400, 'necessita ter todos os campos: titutlo, descricao e ano');
-    const meme = await MemeModule.create({titulo, descricao, ano});
-    return res.send(201, meme);
+        return res.send(
+            HttpCode.unprocessableEntity,
+            'necessita ter todos os campos: titutlo, descricao e ano'
+        );
+    try {
+        const meme: Meme = await MemeModule.create(memeCreateDto);
+        return res.send(HttpCode.created, meme);
+    } catch (error) {
+        return res.send(HttpCode.internalError, error);
+    }
 };
 
-export const updateMeme = async (req, res) => {
+export const updateMeme = async (req: Request, res: Response): Promise<void> => {
     const {id} = req.params;
-    const {titulo, descricao, ano} = req.body;
+    const memePatchDto: MemePatchDto = req.body;
+    const {titulo, descricao, ano} = memePatchDto;
     if (!titulo && !descricao && !ano)
-        return res.send(400, 'necessita alterar algum campo: titulo, descricao ou ano');
-    const meme = await MemeModule.updateById(id, {titulo, descricao, ano});
-    return res.send(meme);
+        return res.send(
+            HttpCode.unprocessableEntity,
+            'necessita alterar algum campo: titulo, descricao ou ano'
+        );
+    try {
+        const meme: Meme = await MemeModule.updateById(id, memePatchDto);
+        return res.send(HttpCode.success, meme);
+    } catch (error) {
+        return res.send(HttpCode.internalError, error)
+    }
 };
 
-export const getMemeById = async (req, res) => {
+export const getMemeById = async (req: Request, res: Response): Promise<void> => {
     const {id} = req.params;
-    const meme = await MemeModule.findById(id);
-    return res.send(meme);
+    try {
+        const meme: Meme = await MemeModule.findById(id);
+        return res.send(HttpCode.success, meme);
+    } catch (error) {
+        return res.send(HttpCode.internalError, error);
+    }
+
 };
 
-export const getMemes = async (req, res) => {
-    const memes = await MemeModule.find();
-    return res.send(memes);
+export const getMemes = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const memes: Meme[] = await MemeModule.find();
+        return res.send(HttpCode.success, memes);
+    } catch (error) {
+        return res.send(HttpCode.internalError, error);
+    }
 };
 
-export const deleteMeme = async (req, res) => {
-    const {id} = req.body;
-    await MemeModule.deleteById(id);
-    return res.send("");
+export const deleteMeme = async (req, res): Promise<void> => {
+    try {
+        const {id} = req.body;
+        const wasDelete = await MemeModule.deleteById(id);
+        const {deletedCount} = wasDelete;
+        return res.send(
+            deletedCount ? HttpCode.success : HttpCode.badRequest,
+            "");
+    } catch (error) {
+        return res.send(HttpCode.internalError, error);
+    }
+
 };
 

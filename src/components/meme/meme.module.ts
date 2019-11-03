@@ -1,37 +1,38 @@
 import MemeModal from './meme.schema';
-import {MemePatchDTO} from './interfaces';
+import {MemeCreateDto, MemePatchDto} from './dto';
+import {Meme} from "./meme.entity";
 
-export const create = async ({titulo, descricao, ano}) => {
-    return MemeModal.create({titulo, descricao, ano});
+export const create = async (memeCreateDto: MemeCreateDto): Promise<Meme> => {
+    return MemeModal.create(memeCreateDto);
 };
 
-export const updateById = async (id, {titulo, descricao, ano}) => {
-    const toSet: MemePatchDTO = {};
-    //this is because is a patch method, you can edit only one field or others.
-    if (titulo) toSet.titulo = titulo;
-    if (descricao) toSet.descricao = descricao;
-    if (ano) toSet.ano = ano;
-    return MemeModal.findOneAndUpdate({
-            _id: id
-        }, {
-            $set: toSet
-        }, {
+export const updateById = async (id: string, memePatchDTO: MemePatchDto): Promise<Meme> => {
+    const match = {
+        _id: id
+    };
+    const update = {
+        $set: memePatchDTO
+    };
+    const config = {
         //this return the new object after update, otherwise will return the old without the changes
-            new: true,
-        }
-    ).lean();
+        new: true,
+    };
+    return MemeModal
+        .findOneAndUpdate(match, update, config)
+        .lean(); //lean is for not create a mongoose object unnecessary. boost 3~~5x more speed.
 };
 
-export const deleteById = async (id) => {
-    await MemeModal.deleteOne({
+export const deleteById = async (id: string) => {
+    const match = {
         _id: id,
-    });
+    };
+    return MemeModal.deleteOne(match);
 };
 
-export const find = async () => {
+export const find = async (): Promise<Meme[]> => {
     return MemeModal.find().lean();
 };
 
-export const findById = async (id) => {
+export const findById = async (id: string): Promise<Meme> => {
     return MemeModal.findById(id).lean();
 };
