@@ -1,4 +1,4 @@
-export interface MemePatchDTO {
+export interface MemePatchDto {
     titulo?: string,
     ano?: number,
     descricao?: string

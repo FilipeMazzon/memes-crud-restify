@@ -1,1 +1,0 @@
-export {MemePatchDTO} from './memePatchDTO';
