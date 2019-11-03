@@ -1,3 +1,4 @@
 node_modules
 .idea
 dist
+*.private.env.json
