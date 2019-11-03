@@ -8,19 +8,21 @@ token: {{token}}
 Content-Type: application/json
 
 {
-  "titulo": "hue br",
+  "titulo": "mazzon",
   "ano": 2000,
   "descricao": "huehuehue"
 }
 
+> ./responseHandler.js
+
 ###
 
-PATCH {{host}}/meme/5dbde7771b5e06444dbf8438
+PATCH {{host}}/meme/{{idMeme}}
 token: {{token}}
 Content-Type: application/json
 
 {
-  "titulo": "huebr5"
+  "ano": 2005
 }
 
 ###
@@ -30,7 +32,7 @@ token: {{token}}
 Content-Type: application/json
 
 {
-  "id": "5dbdd9740a6a663585baba50"
+  "id": "{{idMeme}}"
 }
 
 ###
