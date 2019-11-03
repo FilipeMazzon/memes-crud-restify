@@ -1,35 +1,35 @@
 import axios from 'axios';
-import {LoginDto, loginResponseDto, ValidateTokenResponseDto} from "./dto";
+import { LoginDto, loginResponseDto, ValidateTokenResponseDto } from './dto';
 
 const baseUrl = 'https://ec021-2019-2-av2-auth.herokuapp.com/auth';
 
 export const login = async (loginDTO: LoginDto): Promise<loginResponseDto> => {
-    try {
-        const result = await axios.post(
-            `${baseUrl}/login`,
-            loginDTO
-        );
-        return result.data;
-    } catch (e) {
-        throw e;
-    }
+  try {
+    const result = await axios.post(
+      `${baseUrl}/login`,
+      loginDTO,
+    );
+    return result.data;
+  } catch (e) {
+    throw e;
+  }
 };
 
 export const verifyToken = async (token): Promise<ValidateTokenResponseDto> => {
-    const config = {
-        headers: {
-            token
-        }
-    };
-    const data = {};
-    try {
-        const result = await axios.post(
-            `${baseUrl}/validateToken`,
-            data,
-            config
-        );
-        return result.data;
-    } catch (e) {
-        throw e;
-    }
+  const config = {
+    headers: {
+      token,
+    },
+  };
+  const data = {};
+  try {
+    const result = await axios.post(
+      `${baseUrl}/validateToken`,
+      data,
+      config,
+    );
+    return result.data;
+  } catch (e) {
+    throw e;
+  }
 };

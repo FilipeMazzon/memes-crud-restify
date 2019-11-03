@@ -1,1 +1,1 @@
-client.global.set("idMeme", response.body._id);
+client.global.set('idMeme', response.body._id);

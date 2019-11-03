@@ -1,2 +1,2 @@
-client.global.set("token", response.body.token);
+client.global.set('token', response.body.token);
 

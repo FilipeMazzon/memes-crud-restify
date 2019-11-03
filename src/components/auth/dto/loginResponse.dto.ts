@@ -1,5 +1,5 @@
 export interface loginResponseDto {
-    username: string;
-    logado: boolean;
-    token: string;
+  username: string;
+  logado: boolean;
+  token: string;
 }

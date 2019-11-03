@@ -1,9 +1,9 @@
-import {Router} from 'restify-router';
+import { Router } from 'restify-router';
 
 const authRouter = new Router();
 
 import {
-    login
+  login,
 } from './auth.controller';
 
 authRouter.post('/auth/login', login);

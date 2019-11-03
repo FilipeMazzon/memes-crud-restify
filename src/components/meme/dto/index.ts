@@ -1,2 +1,2 @@
-export {MemePatchDto} from './memePatch.dto';
-export {MemeCreateDto} from './memeCreate.dto';
+export { MemePatchDto } from './memePatch.dto';
+export { MemeCreateDto } from './memeCreate.dto';

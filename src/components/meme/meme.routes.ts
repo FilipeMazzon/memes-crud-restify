@@ -1,11 +1,11 @@
-import {Router} from 'restify-router';
+import { Router } from 'restify-router';
 
 import {
-    createMeme,
-    deleteMeme,
-    getMemeById,
-    getMemes,
-    updateMeme
+  createMeme,
+  deleteMeme,
+  getMemeById,
+  getMemes,
+  updateMeme,
 } from './meme.controller';
 
 const memeRouter = new Router();

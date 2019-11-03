@@ -1,5 +1,5 @@
 export interface MemeCreateDto {
-    titulo: string,
-    ano: number,
-    descricao: string
+  titulo: string,
+  ano: number,
+  descricao: string
 }
