@@ -1,6 +1,11 @@
 GET {{host}}/meme/
 token: {{token}}
 
+> ./responseGetHandler.js
+
+###
+GET {{host}}/meme/{{idMeme}}
+token: {{token}}
 ###
 
 POST {{host}}/meme
