@@ -1,7 +1,7 @@
-(async () => {
-    const mongoose = require('mongoose');
-    const {DB_URL, DB_SETTINGS} = require('../config/mongodb');
+import * as mongoose from 'mongoose';
+import {DB_URL, DB_SETTINGS} from '../config/mongodb';
 
+(async () => {
     try {
         await mongoose.connect(DB_URL, DB_SETTINGS);
     } catch (e) {

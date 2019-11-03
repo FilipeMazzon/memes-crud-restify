@@ -1,14 +1,16 @@
-const {Router} = require('restify-router');
-const memeRouter = new Router();
-const {
+import {Router} from 'restify-router';
+
+import {
     createMeme,
     deleteMeme,
     getMemeById,
     getMemes,
     updateMeme
-} = require('./meme.controller');
+} from './meme.controller';
 
-const authMiddleware = require('../../middlewares/auth');
+const memeRouter = new Router();
+
+import * as authMiddleware from '../../middlewares/auth';
 
 memeRouter.use(authMiddleware.verifyToken);
 
@@ -18,4 +20,4 @@ memeRouter.post('/meme', createMeme);
 memeRouter.patch('/meme/:id', updateMeme);
 memeRouter.del('/meme', deleteMeme);
 
-module.exports = memeRouter;
+export default memeRouter;

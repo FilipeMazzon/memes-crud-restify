@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
+import * as  mongoose from 'mongoose';
+
 const {Schema} = mongoose;
+
 const MemeSchema = new Schema({
     titulo: {type: String, required: true},
     descricao: {type: String, required: true},
@@ -7,6 +9,7 @@ const MemeSchema = new Schema({
     createdAt: {type: Date, default: Date.now()},
     updatedAt: {type: Date, default: Date.now()},
 });
+
 //this is a middleware will active before findOneAndUpdate completed
 //this is a way to you never forget to update the field updateAt
 MemeSchema.pre("findOneAndUpdate", function (next) {
@@ -18,4 +21,4 @@ MemeSchema.pre("findOneAndUpdate", function (next) {
     next();
 });
 
-module.exports = mongoose.model('Memes', MemeSchema);
+export default mongoose.model('Memes', MemeSchema);

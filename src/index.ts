@@ -1,12 +1,12 @@
+import * as  restify from 'restify';
+//connect with db.
+import './database/mongodb';
+
+// import routes
+import authRouter from './components/auth/auth.router';
+import memeRouter from './components/meme/meme.routes';
+
 (async () => {
-    const restify = require('restify');
-
-    //connect with db.
-    require('./database/mongodb');
-
-    // import routes
-    const authRouter = require('./components/auth/auth.router');
-    const memeRouter = require('./components/meme/meme.routes');
     const server = restify.createServer();
 
     //this is a pre middleware which sanitize the route, example: /meme/ will be /meme
@@ -20,7 +20,7 @@
     authRouter.applyRoutes(server);
     memeRouter.applyRoutes(server);
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = parseInt(process.env.PORT, 10) || 3000;
     try {
         await server.listen(PORT);
         console.log(`listen on server :${PORT}`)

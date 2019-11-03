@@ -1,11 +1,12 @@
-const MemeModal = require('./meme.schema');
+import MemeModal from './meme.schema';
+import {MemePatchDTO} from './interfaces';
 
-const create = async ({titulo, descricao, ano}) => {
+export const create = async ({titulo, descricao, ano}) => {
     return MemeModal.create({titulo, descricao, ano});
 };
 
-const updateById = async (id, {titulo, descricao, ano}) => {
-    const toSet = {};
+export const updateById = async (id, {titulo, descricao, ano}) => {
+    const toSet: MemePatchDTO = {};
     //this is because is a patch method, you can edit only one field or others.
     if (titulo) toSet.titulo = titulo;
     if (descricao) toSet.descricao = descricao;
@@ -21,24 +22,16 @@ const updateById = async (id, {titulo, descricao, ano}) => {
     ).lean();
 };
 
-const deleteById = async (id) => {
+export const deleteById = async (id) => {
     await MemeModal.deleteOne({
         _id: id,
     });
 };
 
-const find = async () => {
+export const find = async () => {
     return MemeModal.find().lean();
 };
 
-const findById = async (id) => {
+export const findById = async (id) => {
     return MemeModal.findById(id).lean();
-};
-
-module.exports = { //Export to use this functions in main
-    create,
-    updateById,
-    deleteById,
-    find,
-    findById,
 };

@@ -1,6 +1,6 @@
-const MemeModule = require('./meme.module');
+import * as  MemeModule from './meme.module';
 
-const createMeme = async (req, res) => {
+export const createMeme = async (req, res) => {
     const {titulo, descricao, ano} = req.body;
     if (!titulo || !descricao || !ano)
         return res.send(400, 'necessita ter todos os campos: titutlo, descricao e ano');
@@ -8,7 +8,7 @@ const createMeme = async (req, res) => {
     return res.send(201, meme);
 };
 
-const updateMeme = async (req, res) => {
+export const updateMeme = async (req, res) => {
     const {id} = req.params;
     const {titulo, descricao, ano} = req.body;
     if (!titulo && !descricao && !ano)
@@ -17,29 +17,20 @@ const updateMeme = async (req, res) => {
     return res.send(meme);
 };
 
-const getMemeById = async (req, res) => {
+export const getMemeById = async (req, res) => {
     const {id} = req.params;
     const meme = await MemeModule.findById(id);
     return res.send(meme);
 };
 
-const getMemes = async (req, res) => {
+export const getMemes = async (req, res) => {
     const memes = await MemeModule.find();
     return res.send(memes);
 };
 
-const deleteMeme = async (req, res) => {
+export const deleteMeme = async (req, res) => {
     const {id} = req.body;
     await MemeModule.deleteById(id);
     return res.send("");
 };
-
-module.exports = {
-    createMeme,
-    updateMeme,
-    getMemeById,
-    getMemes,
-    deleteMeme
-};
-
 

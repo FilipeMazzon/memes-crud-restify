@@ -2,13 +2,16 @@
   "name": "microservices",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node index.js",
-    "dev": ""
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "ts-node src/index.ts",
+    "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
+    "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect-brk dist/main.js\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Filipe Mazzon Ribeiro e Matheus Henrique da Silva",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
@@ -17,6 +20,12 @@
     "restify-router": "^0.5.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "@types/node": "^12.12.5",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "tsc-watch": "^4.0.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
   }
 }
