@@ -3,7 +3,7 @@ const MemeModule = require('./meme.module');
 const createMeme = async (req, res) => {
     const {titulo, descricao, ano} = req.body;
     if (!titulo || !descricao || !ano)
-        return res.json({error: "parametros faltando titulo ou descricao ou ano"});
+        return res.send(400, 'necessita ter todos os campos: titutlo, descricao e ano');
     const meme = await MemeModule.create({titulo, descricao, ano});
     return res.send(201, meme);
 };
@@ -12,7 +12,7 @@ const updateMeme = async (req, res) => {
     const {id} = req.params;
     const {titulo, descricao, ano} = req.body;
     if (!titulo && !descricao && !ano)
-        return res.send(400, 'necessita alterar alguma coisa!');
+        return res.send(400, 'necessita alterar algum campo: titulo, descricao ou ano');
     const meme = await MemeModule.updateById(id, {titulo, descricao, ano});
     return res.send(meme);
 };

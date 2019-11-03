@@ -6,6 +6,7 @@ const create = async ({titulo, descricao, ano}) => {
 
 const updateById = async (id, {titulo, descricao, ano}) => {
     const toSet = {};
+    //this is because is a patch method, you can edit only one field or others.
     if (titulo) toSet.titulo = titulo;
     if (descricao) toSet.descricao = descricao;
     if (ano) toSet.ano = ano;
@@ -14,6 +15,7 @@ const updateById = async (id, {titulo, descricao, ano}) => {
         }, {
             $set: toSet
         }, {
+        //this return the new object after update, otherwise will return the old without the changes
             new: true,
         }
     ).lean();
