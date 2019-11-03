@@ -1,8 +1,11 @@
-import * as  mongoose from 'mongoose';
+import {Document, Schema, Model, model} from "mongoose";
+import {IMeme} from './meme.interface';
 
-const {Schema} = mongoose;
+export interface IMemeModel extends IMeme, Document {
 
-const MemeSchema = new Schema({
+}
+
+export const MemeSchema = new Schema({
     titulo: {type: String, required: true},
     descricao: {type: String, required: true},
     ano: {type: Number, required: true},
@@ -21,4 +24,4 @@ MemeSchema.pre("findOneAndUpdate", function (next) {
     next();
 });
 
-export default mongoose.model('Memes', MemeSchema);
+export const Meme: Model<IMemeModel> = model<IMemeModel>("memes", MemeSchema);

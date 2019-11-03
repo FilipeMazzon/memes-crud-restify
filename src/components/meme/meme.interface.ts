@@ -1,4 +1,4 @@
-export interface Meme {
+export interface IMeme {
     _id: string;
     titulo: string,
     descricao: string,

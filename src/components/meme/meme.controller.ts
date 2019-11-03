@@ -2,7 +2,7 @@ import * as  MemeModule from './meme.module';
 import {Request, Response} from 'restify';
 import {HttpCode} from "../../enums/httpCode.enum";
 import {MemeCreateDto, MemePatchDto} from './dto';
-import {Meme} from './meme.entity';
+import {IMeme} from './meme.interface';
 
 export const createMeme = async (req: Request, res: Response): Promise<void> => {
     const memeCreateDto: MemeCreateDto = req.body;
@@ -13,7 +13,7 @@ export const createMeme = async (req: Request, res: Response): Promise<void> => 
             'necessita ter todos os campos: titutlo, descricao e ano'
         );
     try {
-        const meme: Meme = await MemeModule.create(memeCreateDto);
+        const meme: IMeme = await MemeModule.create(memeCreateDto);
         return res.send(HttpCode.created, meme);
     } catch (error) {
         return res.send(HttpCode.internalError, error);
@@ -30,7 +30,7 @@ export const updateMeme = async (req: Request, res: Response): Promise<void> => 
             'necessita alterar algum campo: titulo, descricao ou ano'
         );
     try {
-        const meme: Meme = await MemeModule.updateById(id, memePatchDto);
+        const meme: IMeme = await MemeModule.updateById(id, memePatchDto);
         return res.send(HttpCode.success, meme);
     } catch (error) {
         return res.send(HttpCode.internalError, error)
@@ -40,7 +40,7 @@ export const updateMeme = async (req: Request, res: Response): Promise<void> => 
 export const getMemeById = async (req: Request, res: Response): Promise<void> => {
     const {id} = req.params;
     try {
-        const meme: Meme = await MemeModule.findById(id);
+        const meme: IMeme = await MemeModule.findById(id);
         return res.send(HttpCode.success, meme);
     } catch (error) {
         return res.send(HttpCode.internalError, error);
@@ -50,7 +50,7 @@ export const getMemeById = async (req: Request, res: Response): Promise<void> =>
 
 export const getMemes = async (req: Request, res: Response): Promise<void> => {
     try {
-        const memes: Meme[] = await MemeModule.find();
+        const memes: IMeme[] = await MemeModule.find();
         return res.send(HttpCode.success, memes);
     } catch (error) {
         return res.send(HttpCode.internalError, error);
