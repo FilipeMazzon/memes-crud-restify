@@ -13,9 +13,10 @@ import memeRouter from './components/meme/meme.routes';
   server.pre(restify.pre.sanitizePath());
   // dedupe slashes in URL before routing
   server.pre(restify.plugins.pre.dedupeSlashes());
+
   //make parsers
   server.use(restify.plugins.bodyParser());
-
+  server.use(restify.plugins.queryParser());
   //apply routes.
   authRouter.applyRoutes(server);
   memeRouter.applyRoutes(server);
