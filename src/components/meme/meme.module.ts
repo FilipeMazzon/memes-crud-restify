@@ -1,6 +1,28 @@
 import { Meme } from './meme.schema';
-import { MemeCreateDto, MemePatchDto } from './dto';
+import { MemeCreateDto, MemeFindFilterDto, MemePatchDto } from './dto';
 import { IMeme } from './meme.interface';
+
+export const find = async (memeFindFilterDto: MemeFindFilterDto): Promise<IMeme[]> => {
+  const { titulo, descricao, ano } = memeFindFilterDto;
+  const match: any = {};
+  if (titulo) {
+    match.titulo = { $regex: titulo };
+  }
+  if (descricao) {
+    match.descricao = { $regex: descricao };
+  }
+  if (ano) {
+    match.ano = ano;
+  }
+  const sortConfig = {
+    updatedAt: -1,
+  };
+  return Meme.find(match).sort(sortConfig).lean();
+};
+
+export const findById = async (id: string): Promise<IMeme> => {
+  return Meme.findById(id).lean();
+};
 
 export const create = async (memeCreateDto: MemeCreateDto): Promise<IMeme> => {
   return Meme.create(memeCreateDto);
@@ -27,16 +49,4 @@ export const deleteById = async (id: string) => {
     _id: id,
   };
   return Meme.deleteOne(match);
-};
-
-export const find = async (): Promise<IMeme[]> => {
-  return Meme.find().lean();
-};
-
-export const findById = async (id: string): Promise<IMeme> => {
-  const meme: IMeme = Meme.findById(id).lean();
-  if (!meme) {
-    throw new Error('not found');
-  }
-  return meme;
 };
