@@ -1,12 +1,26 @@
+#get all memes
 GET {{host}}/meme/
 token: {{token}}
 
 > ./responseGetHandler.js
 
 ###
+#find by id
 GET {{host}}/meme/{{idMeme}}
 token: {{token}}
 
+###
+#filtro com regex por titulo
+GET {{host}}/meme/?titulo=maz
+token: {{token}}
+
+> ./responseGetHandler.js
+###
+#filtro por ano igual a 2005
+GET {{host}}/meme/?ano=2005
+token: {{token}}
+
+> ./responseGetHandler.js
 ###
 
 POST {{host}}/meme
@@ -14,12 +28,12 @@ token: {{token}}
 Content-Type: application/json
 
 {
-  "titulo": "mazzon",
+  "titulo": "huehue",
   "ano": 2000,
   "descricao": "huehuehue"
 }
 
-> ./responseHandler.js
+> ./responseCreateHandler.js
 
 ###
 
