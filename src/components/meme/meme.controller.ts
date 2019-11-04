@@ -31,6 +31,9 @@ export const updateMeme = async (req: Request, res: Response): Promise<void> => 
     );
   try {
     const meme: IMeme = await MemeModule.updateById(id, memePatchDto);
+    if (!meme) {
+      return res.send(HttpCode.notFound, `meme with id:${id} not found`);
+    }
     return res.send(HttpCode.success, meme);
   } catch (error) {
     return res.send(HttpCode.internalError, error);
@@ -63,7 +66,7 @@ export const deleteMeme = async (req, res): Promise<void> => {
     const wasDelete = await MemeModule.deleteById(id);
     const { deletedCount } = wasDelete;
     return res.send(
-      deletedCount ? HttpCode.success : HttpCode.badRequest,
+      deletedCount ? HttpCode.success : HttpCode.notFound,
       '');
   } catch (error) {
     return res.send(HttpCode.internalError, error);
