@@ -8,7 +8,7 @@
 + [License](#license)
 
 ## Summary
-This a memes crud microservice which is connect with a auth service to get they token
+This a memes crud micro-service which is connect with a auth service to get they token
 
 This project implements the routes:
 - /auth/login
@@ -23,13 +23,14 @@ Project is created with:
 * [Restify-Router](https://www.npmjs.com/package/restify-router): 0.5.1 organize better the routes of our application
 
 ## Technologies of development
+* [typescript](https://www.typescriptlang.org/): 3.6.4 its a superset of javascript ( principal use is to make js typed)
 * [@type-node](https://www.npmjs.com/package/@types/node): 12.12.5 use modules of nodejs with typescript
-* [prettier](https://prettier.io/): 1.18.2 make code prettier
 * [ts-node](https://www.npmjs.com/package/ts-node): 8.4.1 its for run typescript in server without compile.
 * [ts-watch](https://www.npmjs.com/package/tsc-watch): 4.0.0 its like a nodemon, re-run when something change
+* [prettier](https://prettier.io/): 1.18.2 make code prettier
 * [tslint](https://palantir.github.io/tslint/): 5.20.0 its for make a typescript code more lean
-* [typescript](https://www.typescriptlang.org/): 3.6.4 its a superset of javascript ( principal use is for typing)
-	
+* [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier) : 1.18.0 it's to work with tslint and prettier simultaneous.
+
 ## Setup
 To run this project, install it locally using npm:
 ```shell script
@@ -37,6 +38,26 @@ $ git clone git@github.com:FilipeMazzon/memes-crud-restify.git
 $ cd memes-crud-restify/
 $ npm install
 $ npm start
+```
+> [!NOTE]
+> if not install ts-node in npm install please use npm i -g ts-node
+
+## Setup to production
+```shell script
+$ git clone git@github.com:FilipeMazzon/memes-crud-restify.git
+$ cd memes-crud-restify/
+$ npm install
+$ npm run build
+$ npm run start:prod
+```
+or if you have typescript compiler install globally
+
+```shell script
+$ git clone git@github.com:FilipeMazzon/memes-crud-restify.git
+$ cd memes-crud-restify/
+$ npm install --only=prod
+$ npm run build
+$ npm run start:prod
 ```
 
 
