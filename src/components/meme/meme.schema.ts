@@ -7,9 +7,9 @@ export interface IMemeModel extends IMeme, Document {
 export const MemeSchema = new Schema({
   titulo: { type: String, required: true },
   descricao: { type: String, required: true },
-  ano: { type: Number, required: true },
+  ano: { type: Number, required: true, index: true },
   createdAt: { type: Date, default: Date.now() },
-  updatedAt: { type: Date, default: Date.now() },
+  updatedAt: { type: Date, default: Date.now(), index: true },
 });
 
 //this is a middleware will active before findOneAndUpdate completed
