@@ -1,8 +1,8 @@
-import * as  MemeModule from './meme.module';
 import { Request, Response } from 'restify';
 import { HttpCode } from '../../enums/httpCode.enum';
 import { MemeCreateDto, MemeFindFilterDto, MemePatchDto } from './dto';
 import { IMeme } from './meme.interface';
+import * as  MemeModule from './meme.module';
 
 export const getMemes = async (req: Request, res: Response): Promise<void> => {
   const filter: MemeFindFilterDto = req.query;
@@ -68,8 +68,7 @@ export const updateMeme = async (req: Request, res: Response): Promise<void> => 
 export const deleteMeme = async (req, res): Promise<void> => {
   try {
     const { id } = req.body;
-    const wasDelete = await MemeModule.deleteById(id);
-    const { deletedCount } = wasDelete;
+    const { deletedCount } = await MemeModule.deleteById(id);
     return res.send(
       deletedCount ? HttpCode.success : HttpCode.notFound,
       '');
