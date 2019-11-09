@@ -10,7 +10,7 @@ import {
 
 const memeRouter = new Router();
 
-import * as authMiddleware from '../../middlewares/auth';
+import * as authMiddleware from '../../middlewares/auth.middleware';
 
 memeRouter.use(authMiddleware.verifyToken);
 

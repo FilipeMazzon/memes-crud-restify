@@ -1,5 +1,5 @@
 import * as  restify from 'restify';
-//connect with db.
+// connect with db.
 import './database/mongodb';
 
 // import routes
@@ -9,15 +9,15 @@ import memeRouter from './components/meme/meme.routes';
 (async () => {
   const server = restify.createServer();
 
-  //this is a pre middleware which sanitize the route, example: /meme/ will be /meme
+  // this is a pre middleware which sanitize the route, example: /meme/ will be /meme
   server.pre(restify.pre.sanitizePath());
   // dedupe slashes in URL before routing
   server.pre(restify.plugins.pre.dedupeSlashes());
 
-  //make parsers
+  // make parsers
   server.use(restify.plugins.bodyParser());
   server.use(restify.plugins.queryParser());
-  //apply routes.
+  // apply routes.
   authRouter.applyRoutes(server);
   memeRouter.applyRoutes(server);
 

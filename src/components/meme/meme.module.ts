@@ -1,6 +1,6 @@
-import { Meme } from './meme.schema';
 import { MemeCreateDto, MemeFindFilterDto, MemePatchDto } from './dto';
 import { IMeme } from './meme.interface';
+import { Meme } from './meme.schema';
 
 export const find = async (memeFindFilterDto: MemeFindFilterDto): Promise<IMeme[]> => {
   const { titulo, descricao, ano } = memeFindFilterDto;
@@ -36,12 +36,12 @@ export const updateById = async (id: string, memePatchDTO: MemePatchDto): Promis
     $set: memePatchDTO,
   };
   const config = {
-    //this return the new object after update, otherwise will return the old without the changes
+    // this return the new object after update, otherwise will return the old without the changes
     new: true,
   };
   return Meme
     .findOneAndUpdate(match, update, config)
-    .lean(); //lean is for not create a mongoose object unnecessary. boost 3~~5x more speed.
+    .lean(); // lean is for not create a mongoose object unnecessary. boost 3~~5x more speed.
 };
 
 export const deleteById = async (id: string) => {

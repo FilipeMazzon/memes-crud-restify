@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { LoginDto, loginResponseDto, ValidateTokenResponseDto } from './dto';
+import { LoginDto, LoginResponseDto, ValidateTokenResponseDto } from './dto';
 
 const baseUrl = 'https://ec021-2019-2-av2-auth.herokuapp.com/auth';
 
-export const login = async (loginDTO: LoginDto): Promise<loginResponseDto> => {
+export const login = async (loginDTO: LoginDto): Promise<LoginResponseDto> => {
   try {
     const result = await axios.post(
       `${baseUrl}/login`,
