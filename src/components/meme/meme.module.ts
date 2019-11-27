@@ -17,6 +17,7 @@ export const find = async (memeFindFilterDto: MemeFindFilterDto): Promise<IMeme[
   const sortConfig = {
     updatedAt: -1,
   };
+
   return Meme.find(match).sort(sortConfig).lean();
 };
 
@@ -39,6 +40,7 @@ export const updateById = async (id: string, memePatchDTO: MemePatchDto): Promis
     // this return the new object after update, otherwise will return the old without the changes
     new: true,
   };
+
   return Meme
     .findOneAndUpdate(match, update, config)
     .lean(); // lean is for not create a mongoose object unnecessary. boost 3~~5x more speed.
@@ -48,5 +50,6 @@ export const deleteById = async (id: string) => {
   const match = {
     _id: id,
   };
+
   return Meme.deleteOne(match);
 };

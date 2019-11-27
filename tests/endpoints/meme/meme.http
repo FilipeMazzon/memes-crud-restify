@@ -15,12 +15,14 @@ GET {{host}}/meme/?titulo=maz
 token: {{token}}
 
 > ./responseGetHandler.js
+
 ###
 #filtro por ano igual a 2005
 GET {{host}}/meme/?ano=2005
 token: {{token}}
 
 > ./responseGetHandler.js
+
 ###
 
 POST {{host}}/meme

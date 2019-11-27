@@ -1,16 +1,10 @@
 import { Router } from 'restify-router';
 
-import {
-  createMeme,
-  deleteMeme,
-  getMemeById,
-  getMemes,
-  updateMeme,
-} from './meme.controller';
+import * as authMiddleware from '../../middlewares/auth.middleware';
+
+import { createMeme, deleteMeme, getMemeById, getMemes, updateMeme } from './meme.controller';
 
 const memeRouter = new Router();
-
-import * as authMiddleware from '../../middlewares/auth.middleware';
 
 memeRouter.use(authMiddleware.verifyToken);
 

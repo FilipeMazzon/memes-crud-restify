@@ -1,5 +1,7 @@
 import { Request, Response } from 'restify';
+
 import { HttpCode } from '../../enums/httpCode.enum';
+
 import { MemeCreateDto, MemeFindFilterDto, MemePatchDto } from './dto';
 import { IMeme } from './meme.interface';
 import * as  MemeModule from './meme.module';
@@ -8,6 +10,7 @@ export const getMemes = async (req: Request, res: Response): Promise<void> => {
   const filter: MemeFindFilterDto = req.query;
   try {
     const memes: IMeme[] = await MemeModule.find(filter);
+
     return res.send(HttpCode.success, memes);
   } catch (error) {
     return res.send(HttpCode.internalError, error);
@@ -21,6 +24,7 @@ export const getMemeById = async (req: Request, res: Response): Promise<void> =>
     if (!meme) {
       return res.send(HttpCode.notFound, `meme with id:${id} not found`);
     }
+
     return res.send(HttpCode.success, meme);
   } catch (error) {
     return res.send(HttpCode.internalError, error);
@@ -38,6 +42,7 @@ export const createMeme = async (req: Request, res: Response): Promise<void> => 
   }
   try {
     const meme: IMeme = await MemeModule.create(memeCreateDto);
+
     return res.send(HttpCode.created, meme);
   } catch (error) {
     return res.send(HttpCode.internalError, error);
@@ -59,6 +64,7 @@ export const updateMeme = async (req: Request, res: Response): Promise<void> => 
     if (!meme) {
       return res.send(HttpCode.notFound, `meme with id:${id} not found`);
     }
+
     return res.send(HttpCode.success, meme);
   } catch (error) {
     return res.send(HttpCode.internalError, error);
@@ -69,6 +75,7 @@ export const deleteMeme = async (req, res): Promise<void> => {
   try {
     const { id } = req.body;
     const { deletedCount } = await MemeModule.deleteById(id);
+
     return res.send(
       deletedCount ? HttpCode.success : HttpCode.notFound,
       '');
